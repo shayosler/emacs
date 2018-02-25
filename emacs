@@ -49,6 +49,10 @@
 ;; Continuous scroll
 (setq-default doc-view-continuous t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; run shalle-command in interactive mode so aliases get sources
+(setq shell-command-switch "-ic")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Variables set with Customize
 (custom-set-variables
