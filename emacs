@@ -1,15 +1,24 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Behavior
-
-;; Save sessions
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Behavior
+
+;; Save sessions
 (desktop-save-mode 1)
+
+;; Backups (~ files)
+(setq backup-directory-alist `(("." . "~/.emacs_saves")))
+(setq backup-by-copying t) ; Might be slow under some circumstances
+
+;; Show matching parentheses
+(show-paren-mode 1)
+
+;;Load aliases
+(setenv "BASH_ENV" "~/.bash_aliases")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Look and feel
@@ -56,8 +65,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (auctex)))
  '(LaTeX-command "latex")
+ '(TeX-command-BibTeX "Biber")
  '(TeX-error-overview-open-after-TeX-run t)
  '(TeX-view-program-selection
    (quote
@@ -67,7 +76,8 @@
       "dvips and gv")
      (output-dvi "xdvi")
      (output-pdf "Okular")
-     (output-html "xdg-open")))))
+     (output-html "xdg-open"))))
+ '(package-selected-packages (quote (auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
