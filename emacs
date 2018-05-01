@@ -17,8 +17,11 @@
 ;; Show matching parentheses
 (show-paren-mode 1)
 
-;;Load aliases
+;; Load aliases
 (setenv "BASH_ENV" "~/.bash_aliases")
+
+;; Shell prompt read only
+(setq comint-prompt-read-only t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Look and feel
@@ -59,8 +62,8 @@
 (setq-default doc-view-continuous t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; run shalle-command in interactive mode so aliases get sources
-(setq shell-command-switch "-ic")
+;; run shell-command in interactive mode so aliases get sourced
+;;(setq shell-command-switch "-ic")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Variables set with Customize
