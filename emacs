@@ -4,6 +4,8 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Behavior
 
@@ -30,8 +32,12 @@
 
 ;; Indentation
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 2) 
+(setq-default tab-width 2)
 (defvaralias 'cperl-indent-level 'tab-width)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C/C++ Configuration
@@ -54,6 +60,20 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Python
+;; Add stuff to pythonpath
+;; TODO: I don't know why the /usr/local/lib/python2.7/dist-packages has to be explicitly added
+(setenv "PYTHONPATH"
+  (let ((current (getenv "PYTHONPATH"))
+        (new "/usr/local/share/gss_python_modules:/usr/local/share/gss_python_modules/gss:/home/sosler/gss_bin/:/usr/local/lib/python2.7/dist-packages"))
+    (if current (concat new ":" current) new)))
+(elpy-enable)
+
+;; Set up company-jedi stuff
+(defun company-jedi-setup ()
+  (add-to-list 'company-backends 'company-jedi))
+(add-hook 'python-mode-hook 'company-jedi-setup)
+(setq jedi:complete-on-dot t)
+(add-hook 'python-mode-hook 'jedi:setup)
 (setq python-indent-offset 4)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -65,6 +85,12 @@
 ;; run shell-command in interactive mode so aliases get sourced
 ;;(setq shell-command-switch "-ic")
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package sources
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Variables set with Customize
 (custom-set-variables
@@ -75,16 +101,7 @@
  '(LaTeX-command "latex")
  '(TeX-command-BibTeX "Biber")
  '(TeX-error-overview-open-after-TeX-run t)
- '(TeX-view-program-selection
-   (quote
-    (((output-dvi has-no-display-manager)
-      "dvi2tty")
-     ((output-dvi style-pstricks)
-      "dvips and gv")
-     (output-dvi "xdvi")
-     (output-pdf "Okular")
-     (output-html "xdg-open"))))
- '(package-selected-packages (quote (auctex))))
+ '(package-selected-packages (quote (company-jedi flycheck py-autopep8 elpy auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
