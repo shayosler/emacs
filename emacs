@@ -4,8 +4,6 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Behavior
 
@@ -24,6 +22,9 @@
 
 ;; Shell prompt read only
 (setq comint-prompt-read-only t)
+
+;; Start server
+(server-start)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Look and feel
@@ -74,7 +75,13 @@
 (add-hook 'python-mode-hook 'company-jedi-setup)
 (setq jedi:complete-on-dot t)
 (add-hook 'python-mode-hook 'jedi:setup)
+
+;; Indent depth of 4 spaces
 (setq python-indent-offset 4)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Common Lisp
+(setq inferior-lisp-program "/usr/bin/sbcl")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DocView
@@ -83,7 +90,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; run shell-command in interactive mode so aliases get sourced
-;;(setq shell-command-switch "-ic")
+;(setq shell-command-switch "-ic")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package sources
@@ -101,11 +108,13 @@
  '(LaTeX-command "latex")
  '(TeX-command-BibTeX "Biber")
  '(TeX-error-overview-open-after-TeX-run t)
- '(package-selected-packages (quote (company-jedi flycheck py-autopep8 elpy auctex))))
+ '(package-selected-packages
+   (quote
+    (slime company-jedi flycheck py-autopep8 elpy auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(highlight-indentation-face ((t (:inherit fringe :background "sky blue")))))
 (put 'narrow-to-region 'disabled nil)
