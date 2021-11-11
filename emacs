@@ -54,6 +54,10 @@
 ;; Start server
 (server-start)
 
+;; Automatically revert buffers
+;; this doesnt work quite how I'd like
+(global-auto-revert-mode 0)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Look and feel
 ;; Highlight color
@@ -62,6 +66,8 @@
 ;; Indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
+(setq-default sh-basic-offset 2)
+(setq-default sh-indentation 2)
 (defvaralias 'cperl-indent-level 'tab-width)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
