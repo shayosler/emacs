@@ -4,6 +4,34 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Variables set with Customize
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-command "latex")
+ '(TeX-command-BibTeX "Biber")
+ '(TeX-error-overview-open-after-TeX-run t)
+ '(package-selected-packages
+   (quote
+    (slime company-jedi flycheck py-autopep8 elpy auctex)))
+ '(tool-bar-mode nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(highlight-indentation-face ((t (:inherit fringe :background "sky blue")))))
+(put 'narrow-to-region 'disabled nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package sources
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Behavior
 
@@ -79,6 +107,10 @@
 ;; Indent depth of 4 spaces
 (setq python-indent-offset 4)
 
+;; Enable autopep8 on save
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Common Lisp
 (setq inferior-lisp-program "/usr/bin/sbcl")
@@ -92,29 +124,4 @@
 ;; run shell-command in interactive mode so aliases get sourced
 ;(setq shell-command-switch "-ic")
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Package sources
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Variables set with Customize
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(LaTeX-command "latex")
- '(TeX-command-BibTeX "Biber")
- '(TeX-error-overview-open-after-TeX-run t)
- '(package-selected-packages
-   (quote
-    (slime company-jedi flycheck py-autopep8 elpy auctex))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-indentation-face ((t (:inherit fringe :background "sky blue")))))
-(put 'narrow-to-region 'disabled nil)
