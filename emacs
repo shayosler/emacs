@@ -14,9 +14,9 @@
  '(LaTeX-command "latex")
  '(TeX-command-BibTeX "Biber")
  '(TeX-error-overview-open-after-TeX-run t)
- '(package-selected-packages
-   (quote
-    (slime company-jedi flycheck py-autopep8 elpy auctex)))
+ '(TeX-parse-self t)
+ '(elpy-rpc-python-command "python3")
+ '(package-selected-packages '(slime company-jedi flycheck py-autopep8 elpy auctex))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -30,7 +30,7 @@
 ;; Package sources
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+             '("melpa"        . "https://melpa.org/packages/"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Behavior
@@ -116,6 +116,16 @@
 ;; Enable autopep8 on save
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
+;; Cleanup whitespace on save
+(defun my-python-mode-setup ()
+  (add-hook 'before-save-hook #'delete-trailing-whitespace nil 'local))
+(add-hook 'python-mode-hook #'my-python-mode-setup)
+
+;; Use flycheck instead of flymake
+(when (load "flycheck" t t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Common Lisp
