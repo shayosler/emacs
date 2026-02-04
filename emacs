@@ -139,5 +139,3 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; run shell-command in interactive mode so aliases get sourced
 ;(setq shell-command-switch "-ic")
-
-
